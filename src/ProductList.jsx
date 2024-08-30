@@ -262,13 +262,19 @@ function ProductList() {
         dispatch(updateCartCount());
         return cart.count;
     };
+    const getUrl = () => {
+        if (window.location.href.includes("github")) {
+            return "https://phillipnpatrick.github.io/shoppingreact/";
+        }
+        return "/";
+    };
     return (
         <div>
             <div className="navbar" style={styleObj}>
                 <div className="tag">
                     <div className="luxury">
                         <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
-                        <a href="/" style={{textDecoration:'none'}}>
+                        <a href={getUrl()} style={{textDecoration:'none'}}>
                             <div>
                                 <h3 style={{color:'white'}}>Paradise Nursery</h3>
                                 <i style={{color:'white'}}>Where Green Meets Serenity</i>
