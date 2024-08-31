@@ -250,3 +250,8 @@ body {
         text-align: center; /* Align text to the center */
       }
   }
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}

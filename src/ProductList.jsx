@@ -268,6 +268,28 @@ function ProductList() {
         }
         return "/";
     };
+    const isPlantInCart = (product) => {
+        if (cart.items.length == 0){ // if the cart is empty, reset all products fo false
+            if (addedToCart[product.name]){
+                setAddedToCart((prevState) => ({
+                    ...prevState,
+                    [product.name]: false,
+                }));
+            }
+        }  else { // check if items are still in the cart
+            const plantInCart = cart.items.find(item => item.name === product.name);
+            const productInCart = addedToCart[product.name];
+            
+            // if the product is NOT in the cart (plantInCart), but the product says it is -- reset product to false
+            if (!plantInCart && productInCart) {
+                setAddedToCart((prevState) => ({
+                    ...prevState,
+                    [product.name]: false,
+                }));
+            }
+        }
+        return addedToCart[product.name];
+    };
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -311,7 +333,7 @@ function ProductList() {
                                     <div className='product-title'>{plant.name}</div>
                                     <div>{plant.description}</div>
                                     <div className='product-price'>{plant.cost}</div>
-                                    <button className='product-button' onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                                    <button disabled={isPlantInCart(plant)} className='product-button' onClick={() => handleAddToCart(plant)}>Add to Cart</button>
                                 </div>
                             ))}
                         </div>
